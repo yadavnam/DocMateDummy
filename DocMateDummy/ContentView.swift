@@ -8,26 +8,40 @@
 import SwiftUI
 
 struct ContentView: View {
-    
-    @Environment(AppViewModel.self) var viewModel
-    
+
+    @State private var selectedTab     = 0
+    @State private var showScanner     = false
+    @State private var showPhotoPicker = false
+
     var body: some View {
-        TabView{
-            NavigationStack{
-                HomeView()
-            }.tabItem{
-                Label("Home", systemImage: "house")
-            }
-            NavigationStack{
-                
-            }.tabItem{
-                Label("Add", systemImage: "plus")
-            }
-            NavigationStack{
-                BrowseView()
-            }.tabItem{
-                Label("Browse", systemImage: "folder")
-            }
+
+        TabView(selection: $selectedTab) {
+            NavigationStack { HomeView() }
+                .tabItem { Label("Home", systemImage: "house") }
+                .tag(0)
+
+            Color.clear
+                .tabItem { Label("Add", systemImage: "plus") }
+                .tag(1)
+
+            NavigationStack { BrowseView() }
+                .tabItem { Label("Browse", systemImage: "folder") }
+                .tag(2)
+        }
+        .onChange(of: selectedTab) {
+            if selectedTab == 1 { selectedTab = 0 }
+        }
+        .overlay(alignment: .bottom) {
+            PlusContextButton(
+                showScanner:     $showScanner,
+                showPhotoPicker: $showPhotoPicker
+            )
+        }
+        .fullScreenCover(isPresented: $showScanner) {
+            AddDocumentCoordinator(source: .camera)
+        }
+        .sheet(isPresented: $showPhotoPicker) {
+            AddDocumentCoordinator(source: .gallery)
         }
     }
 }

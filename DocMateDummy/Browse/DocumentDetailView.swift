@@ -154,9 +154,25 @@ struct DocumentDetailView: View {
                 .scaledToFit()
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 .padding(.horizontal)
+
         } else {
-            previewPlaceholder
-                .padding(.horizontal)
+            let imgs = viewModel.images(for: document)
+            if !imgs.isEmpty {
+                TabView {
+                    ForEach(imgs.indices, id: \.self) { i in
+                        Image(uiImage: imgs[i])
+                            .resizable()
+                            .scaledToFit()
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                            .padding(.horizontal)
+                    }
+                }
+                .tabViewStyle(.page)
+                .frame(height: 420)
+            } else {
+                previewPlaceholder
+                    .padding(.horizontal)
+            }
         }
     }
 
@@ -207,7 +223,7 @@ struct DocumentDetailView: View {
                 userId: UUID(),
                 categoryId: UUID(),
                 createdAt: Date(),
-                assetName: "sample_puc" 
+                assetName: "sample_puc"
             )
         )
         .environment(AppViewModel())

@@ -10,6 +10,7 @@ import SwiftUI
 
 struct DocumentThumbnailView: View {
     let document: Document
+    @Environment(AppViewModel.self) var viewModel
 
     private var formattedDate: String {
         let f = DateFormatter()
@@ -27,6 +28,11 @@ struct DocumentThumbnailView: View {
                 if let assetName = document.assetName,
                    let img = UIImage(named: assetName) {
                     Image(uiImage: img)
+                        .resizable()
+                        .scaledToFill()
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                } else if let firstPage = viewModel.images(for: document).first {
+                    Image(uiImage: firstPage)
                         .resizable()
                         .scaledToFill()
                         .clipShape(RoundedRectangle(cornerRadius: 10))

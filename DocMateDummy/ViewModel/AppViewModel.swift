@@ -7,10 +7,14 @@
 
 
 import Foundation
+import UIKit
 
 @Observable
 class AppViewModel {
     
+    // Images alag store - Document struct se bahar
+    var imageStore: [UUID: [UIImage]] = [:]
+
     static let financeId   = UUID()
     static let identityId  = UUID()
     static let educationId = UUID()
@@ -130,6 +134,17 @@ class AppViewModel {
     }
 
     // MARK: - Actions
+    func addDocument(_ document: Document, images: [UIImage] = []) {
+        documents.append(document)
+        if !images.isEmpty {
+            imageStore[document.id] = images
+        }
+    }
+
+    func images(for document: Document) -> [UIImage] {
+        imageStore[document.id] ?? []
+    }
+
     func togglePin(_ document: Document) {
         if let i = documents.firstIndex(where: { $0.id == document.id }) {
             documents[i].isPinned.toggle()
