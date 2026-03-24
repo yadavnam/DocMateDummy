@@ -24,7 +24,7 @@ class DocumentHandler {
     // Files App se URLs
     static func handleFiles(_ urls: [URL]) {
         for url in urls {
-            print("📁 File selected:", url)
+            print("File selected:", url)
         }
         // TODO: files ko process karo
     }

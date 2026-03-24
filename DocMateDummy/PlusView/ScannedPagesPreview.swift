@@ -70,7 +70,7 @@ struct ScannedPagesPreview: View {
                     HStack {
                         Image(systemName: "doc.text")
                             .foregroundStyle(.secondary)
-                        TextField("Document ka naam likhein", text: $documentName)
+                        TextField("Enter Document Name", text: $documentName)
                             .focused($nameFocused)
                             .submitLabel(.done)
                     }
@@ -81,7 +81,7 @@ struct ScannedPagesPreview: View {
                         RoundedRectangle(cornerRadius: 12)
                             .stroke(Color(.separator), lineWidth: 1)
                     )
-
+/*
                     // Category Picker
                     if let binding = categoryBinding {
                         HStack {
@@ -107,7 +107,7 @@ struct ScannedPagesPreview: View {
                                 .stroke(Color(.separator), lineWidth: 1)
                         )
                     }
-
+*/
                     // Page count
                     Text("\(pages.count) page\(pages.count > 1 ? "s" : "") scanned")
                         .font(.caption)

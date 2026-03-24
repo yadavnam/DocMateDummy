@@ -27,7 +27,7 @@ class AppViewModel {
         Category(name: "Finance",       sfSymbol: "dollarsign.circle", fixedId: AppViewModel.financeId),
         Category(name: "Identity",      sfSymbol: "person.circle",     fixedId: AppViewModel.identityId),
         Category(name: "Education",     sfSymbol: "book.circle",       fixedId: AppViewModel.educationId),
-        Category(name: "Vehicle",       sfSymbol: "car.side.fill",     fixedId: AppViewModel.vehicleId),
+        Category(name: "Vehicle",       sfSymbol: "car.side",     fixedId: AppViewModel.vehicleId),
         Category(name: "Service Bills", sfSymbol: "house",             fixedId: AppViewModel.billsId),
         Category(name: "Policies",      sfSymbol: "doc",               fixedId: AppViewModel.policiesId),
         Category(name: "Other",         sfSymbol: "questionmark.circle", fixedId: AppViewModel.otherId)
