@@ -72,7 +72,14 @@ struct HomeView: View {
                             }
                         }
                     }
-                    
+                    // MARK: Your Bills
+
+                    if !viewModel.inFetch.isEmpty {
+                        
+                        YourBillsSection(
+                            bills: viewModel.inFetch.filter { $0.inFetchCatgogry == .bill }
+                        )
+                    }
                     
                     // MARK: Recently Saved
                     
@@ -86,7 +93,6 @@ struct HomeView: View {
                         if viewModel.recentDocuments.count > 4 {
                             NavigationLink(destination: RecentlySavedView()) {
                                 Image(systemName: "chevron.right")
-                                    .font(.subheadline)
                                     .foregroundColor(.gray)
                             }
                         }
@@ -152,17 +158,15 @@ struct HomeView: View {
             .navigationTitle("Home")
             
             .toolbar {
-                
                 ToolbarItemGroup(placement: .topBarTrailing) {
-                    Button{
+                    Button {
                         showProfileView = true
                     } label: {
                         Text(viewModel.user.initials)
-                            .font(.system(size: 18))
-                            .fontWeight(.bold)
+                            .fontWeight(.medium)
+                            .foregroundStyle(.blue)
                     }
-                    .padding(.horizontal , 8)
-                    .buttonStyle(.plain)
+                    .buttonStyle(.automatic)
                 }
             }
         

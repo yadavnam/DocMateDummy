@@ -112,3 +112,21 @@ struct DocumentTag: Identifiable {
     var documentId : UUID
     var tagId      : UUID
 }
+struct infetch:Identifiable{
+    let id=UUID()
+    var name:String
+    var dueDate:Date
+    var SubjectName:String
+    var amount:Double?
+    var inFetchCatgogry:InfetchCategory
+}
+enum InfetchCategory: String, CaseIterable, Identifiable {
+    
+    case finance = "Finance"
+    case insurance = "Insurance"
+    case other = "Other"
+    case bill = "Bill"
+    case policy = "Policy"
+    
+    var id: String { self.rawValue }
+}

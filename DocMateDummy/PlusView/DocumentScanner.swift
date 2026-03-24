@@ -38,7 +38,6 @@ struct DocumentScanner: UIViewControllerRepresentable {
             self.onCancel = onCancel
         }
 
-        // ✅ Scan completed - saare pages milte hain
         func documentCameraViewController(
             _ controller: VNDocumentCameraViewController,
             didFinishWith scan: VNDocumentCameraScan
@@ -52,14 +51,14 @@ struct DocumentScanner: UIViewControllerRepresentable {
             }
         }
 
-        // ❌ Cancel
+
         func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
             controller.dismiss(animated: true) {
                 self.onCancel()
             }
         }
 
-        // ⚠️ Error
+
         func documentCameraViewController(
             _ controller: VNDocumentCameraViewController,
             didFailWithError error: Error
