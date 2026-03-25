@@ -17,36 +17,23 @@ struct ContentView: View {
 
     var body: some View {
 
-        TabView(selection: $selectedTab) {
+        TabView() {
             
-            NavigationStack { HomeView() }
+            NavigationStack {
+                HomeView()
+            }
                 .tabItem { Label("Home", systemImage: "house") }
-                .tag(0)
+                
 
-            NavigationStack { EmptyView() }
-                .tabItem { }
-                .tag(1)
+            NavigationStack{ EmptyView()}
+            .tabItem{
+                Label("Add" , systemImage: "document.badge.plus")
+                
+            }
 
             NavigationStack { BrowseView() }
                 .tabItem { Label("Browse", systemImage: "folder") }
-                .tag(2)
-        }
-        
-        .overlay(alignment: .bottom) {
-            PlusContextButton(
-                showScanner: $showScanner,
-                showPhotoPicker: $showPhotoPicker
-            )
-            .padding(.bottom, 20)
-        }
-        .fullScreenCover(isPresented: $showScanner) {
-            AddDocumentCoordinator(source: .camera)
-                .environment(viewModel)
-        }
-        
-        .sheet(isPresented: $showPhotoPicker) {
-            AddDocumentCoordinator(source: .gallery)
-                .environment(viewModel)
+                
         }
     }
 }
