@@ -22,29 +22,33 @@ struct YourBillsSection: View {
                 }
             }
             
-            // 🔥 Apple Style Card Transition
+            //  Apple Style Card Transition
             if !bills.isEmpty {
-                
                 ZStack {
-                    InfetchBillCard(doc: bills[currentIndex])
-                        .id(currentIndex) // 🔥 important
+                    BillsCarouselView(bills: bills)
+                        .id(currentIndex) // important
                         .transition(.asymmetric(
                             insertion: .move(edge: .trailing).combined(with: .opacity),
                             removal: .move(edge: .leading).combined(with: .opacity)
                         ))
                 }
-                .animation(.easeInOut(duration: 0.5), value: currentIndex)
+                .animation(.easeInOut(duration: 1.0), value: currentIndex)
                 .onAppear {
                     startAutoScroll()
+                }
+                .onChange(of: bills.count) {
+                    if currentIndex >= bills.count {
+                        currentIndex = max(0, bills.count - 1)
+                    }
                 }
             }
         }
     }
     
-    // 🔥 Auto Change
+    //  Auto Change
     func startAutoScroll() {
         
-        Timer.scheduledTimer(withTimeInterval: 2.5, repeats: true) { _ in
+        Timer.scheduledTimer(withTimeInterval: 3.5, repeats: true) { _ in
             
             if bills.isEmpty { return }
             
