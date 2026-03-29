@@ -122,11 +122,14 @@ struct infetch:Identifiable{
 }
 enum InfetchCategory: String, CaseIterable, Identifiable {
     
+    
+    case bill = "Bill"
     case finance = "Finance"
     case insurance = "Insurance"
-    case other = "Other"
-    case bill = "Bill"
     case policy = "Policy"
+    case other = "Other"
+    
+    
     
     var id: String { self.rawValue }
 }
